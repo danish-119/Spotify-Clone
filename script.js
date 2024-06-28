@@ -1,9 +1,8 @@
 console.log("Welcome to Spotify Clone!");
 
 let activeSong = new Audio();
-let songs = [];
 
-// ---------------------------------------------------------------------------------
+// Fetches the list of songs from the server.
 async function getSongs() {
   let a = await fetch("http://127.0.0.1:5500/Inventory/Songs/");
   let response = await a.text();
@@ -24,7 +23,7 @@ async function getSongs() {
   return songs;
 }
 
-//--------------------------------------------------------------------------------------
+// Plays the selected music track.
 function playMusic(track) {
   activeSong.src = "/Inventory/Songs/" + track + ".mp3";
   document.querySelectorAll(".play").forEach((element) => {
@@ -36,26 +35,25 @@ function playMusic(track) {
   activeSong.play();
 }
 
-// -------------------------------------------------------------------------------------
+// Main function to initialize the music player.
 async function main() {
   songs = await getSongs();
 
   let element = document.querySelector(".songs-list");
   for (const song of songs) {
-    element.innerHTML =
-      element.innerHTML +
-      `           <li class="song">
-                    <img src="Inventory/Icons/music.svg" alt="">
-                    <span class="song-info">
-                        <div class="song-title">${song}</div>
-                        <span>Sidhu Moose Wala</span>
-                    </span>
-                    <span class="play-now">Play Now</span>
-                    <img class="play" src="Inventory/Icons/play.svg" alt="">
-                </li>`;
+    element.innerHTML += `
+      <li class="song">
+        <img src="Inventory/Icons/music.svg" alt="">
+        <span class="song-info">
+          <div class="song-title">${song}</div>
+          <span>Sidhu Moose Wala</span>
+        </span>
+        <span class="play-now">Play Now</span>
+        <img class="play" src="Inventory/Icons/play.svg" alt="">
+      </li>`;
   }
 
-  // ------------
+  // Add event listener to play button of each song
   Array.from(document.querySelectorAll(".song")).forEach((e) => {
     e.querySelector(".play").addEventListener("click", () => {
       console.log(e.querySelector(".song-title").innerHTML);
@@ -64,7 +62,7 @@ async function main() {
     });
   });
 
-  //---------
+  // Add event listener to play-pause button
   document.querySelector(".play-pause").addEventListener("click", () => {
     console.log("play-pause clicked");
     if (activeSong.paused) {
@@ -76,7 +74,7 @@ async function main() {
     }
   });
 
-  //------------
+  // Add event listener to volume button
   document.querySelector(".volume-on").addEventListener("click", () => {
     if (activeSong.volume != 0) {
       activeSong.volume = 0;
@@ -87,13 +85,13 @@ async function main() {
     }
   });
 
-  // ------------
+  // Add event listener to volume range slider
   document.querySelector(".volume-range").addEventListener("input", () => {
     activeSong.volume = document.querySelector(".volume-range").value;
     document.querySelector(".volume-on").src = "Inventory/Icons/volume.svg";
   });
 
-  // -----------
+  // Update song progress and time display
   activeSong.addEventListener("timeupdate", () => {
     const formatTime = (seconds) => {
       const minutes = Math.floor(seconds / 60);
@@ -101,9 +99,13 @@ async function main() {
       return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
     };
 
-    document.querySelector(".song-time").innerHTML = `${formatTime(activeSong.currentTime)}/${formatTime(activeSong.duration)}`;
-    document.querySelector(".circle").style.left = (activeSong.currentTime / activeSong.duration) * 100 + "%";
+    document.querySelector(".song-time").innerHTML = `${formatTime(
+      activeSong.currentTime
+    )}/${formatTime(activeSong.duration)}`;
+    document.querySelector(".circle").style.left =
+      (activeSong.currentTime / activeSong.duration) * 100 + "%";
   });
 }
 
+// Initialize the music player
 main();
