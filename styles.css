@@ -5,6 +5,14 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a,
+.song-buttons img,
+.volume img,
+.volume input,
+.seekbar, .play{
+  cursor: pointer;
+}
+
 body {
   background-color: black;
   color: white;
@@ -12,7 +20,7 @@ body {
 }
 
 .sidebar {
-  height: 100vh;
+  height: 100%;
   width: 25%;
 }
 
@@ -24,13 +32,17 @@ body {
   filter: invert(1);
 }
 
-.sidebar .sidebar-top,
-.sidebar .sidebar-bottom {
-  margin: 10px;
+.sidebar-top,
+.sidebar-bottom {
+  margin: 12px;
   padding: 10px;
   border-radius: 8px;
+  background-color: rgb(22, 21, 21);
+}
+
+.sidebar-top,
+.heading {
   font-weight: bold;
-  background-color: rgb(32, 31, 31);
 }
 
 .sidebar-top ul {
@@ -41,27 +53,27 @@ body {
   margin-top: 20px;
 }
 
+.sidebar-top ul img {
+  width: 20px;
+  margin-right: 8px;
+}
+
 .sidebar-top ul li {
   list-style: none;
   display: flex;
   align-items: center;
 }
 
-.sidebar-top ul img,
-.library img {
-  width: 20px;
+.sidebar-bottom {
+  height: 100vh;
+}
+
+.heading img {
+  width: 35px;
   margin-right: 8px;
 }
 
-.library img {
-  width: 35px;
-}
-
-.sidebar-bottom {
-   height: 100vh;
-  }
-
-.sidebar-bottom .library {
+.sidebar-bottom .heading {
   display: flex;
   align-items: center;
   font-size: 1.2em;
@@ -69,15 +81,173 @@ body {
   padding: 10px;
 }
 
+.sidebar-bottom .songs-list {
+  min-height: 85vh;
+}
+
+.songs-list .song{
+  font-size: 12px;
+  padding: 15px 5px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
+.song .song-info{
+  width: 50%;
+}
+
+.sidebar-bottom .footer ul {
+  display: flex;
+  gap: 10px;
+  bottom: 0;
+  font-size: 10px;
+  font-weight: normal;
+  list-style: none;
+}
+
+.sidebar-bottom .footer ul li a {
+  color: gray;
+}
+
 .main-content {
-  background-color: chartreuse;
   width: 75%;
 }
 
 .main-content .header {
-  background-color: aqua;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  margin-left: 12px;
+  padding: 30px;
+  background-color: rgb(32, 31, 31);
 }
 
-.main-content .playlists-section {
-  background-color: coral;
+.account-options #sign-up {
+  font-weight: bold;
+  text-decoration: none;
+  color: gray;
+  margin-right: 40px;
+}
+
+.account-options #sign-up:hover {
+  color: white;
+  font-size: 1.02em;
+}
+
+.account-options #log-in {
+  text-decoration: none;
+  color: black;
+  border-radius: 20px;
+  background-color: white;
+  padding: 10px 18px;
+  border: 2px solid gray;
+}
+
+.account-options #log-in:hover {
+  font-weight: bold;
+}
+
+.playlists-section {
+  margin-left: 12px;
+  background-color: rgb(22, 21, 21);
+  min-height: 110.5vh;
+  border-bottom-left-radius: 8px;
+}
+
+.playlists-section .heading {
+  font-size: 2em;
+  padding: 20px;
+}
+
+.playlists-section .playlists{
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 0 5.05vw;
+}
+
+.playlist{
+  width: 150px;
+  height: 182px;
+  background-color: rgb(44, 44, 44);
+  border-radius: 8px;
+}
+
+.playlist img{
+  width: 132px;
+  margin: 8px;
+  margin-bottom: 0;
+  border-radius: 8px;
+}
+
+
+.playlist-title, .play-now{
+  font-weight: bold;
+}
+
+.playlist span{
+  margin-left: 8px;
+}
+
+.playlist-description{
+  font-size: 0.7em;
+  display: block;
+  margin-top: 3px;
+}
+
+.play-bar {
+  filter: invert(1);
+  background-color: #e2d9d9;
+  width: 70vw;
+  border-radius: 8px;
+  height: 80px;
+  top: 82vh;
+  right: 1.5vw;
+  position: fixed;
+}
+
+.play-bar .first {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.play-bar .first .song-name {
+  width: 180px;
+}
+
+.play-bar .song-buttons,
+.volume {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.play-bar .song-buttons img {
+  width: 30px;
+}
+
+.seekbar {
+  height: 4px;
+  width: 98%;
+  background: black;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 8px;
+  margin: 6px;
+}
+
+.circle {
+  width: 13px;
+  height: 13px;
+  border-radius: 13px;
+  background-color: black;
+  position: relative;
+  bottom: 5px;
+  left: 0%;
+  transition: left 0.5s;
 }
