@@ -65,7 +65,8 @@ body {
 }
 
 .sidebar-bottom {
-  height: 100vh;
+  position: relative;
+  height: 70vh;
 }
 
 .heading img {
@@ -81,11 +82,9 @@ body {
   padding: 10px;
 }
 
-.sidebar-bottom .songs-list {
-  min-height: 85vh;
-}
 
 .songs-list{
+  height: 50vh;
   list-style: decimal;
   overflow: auto;
 }
@@ -103,6 +102,11 @@ body {
 
 .song .song-info{
   width: 50%;
+}
+
+.sidebar-bottom .footer{
+  position: absolute;
+  bottom: 10px;
 }
 
 .sidebar-bottom .footer ul {
@@ -159,7 +163,8 @@ body {
 .playlists-section {
   margin-left: 12px;
   background-color: rgb(22, 21, 21);
-  min-height: 110.5vh;
+  height: 80.5vh;
+  overflow: auto;
   border-bottom-left-radius: 8px;
 }
 
@@ -213,6 +218,9 @@ body {
   top: 82vh;
   right: 1.5vw;
   position: fixed;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .play-bar .first {
@@ -222,7 +230,7 @@ body {
 }
 
 .play-bar .first .song-name {
-  width: 180px;
+  min-width: 180px;
 }
 
 .play-bar .song-buttons,
@@ -256,3 +264,19 @@ body {
   left: 0%;
   transition: left 0.5s;
 }
+
+
+/* For Webkit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333; /* Dark color for the thumb */
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #222; /* Dark color for the track */
+}
+
