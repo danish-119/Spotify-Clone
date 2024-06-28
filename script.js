@@ -1,5 +1,5 @@
 console.log("Welcome to Spotify Clone!");
-
+let acitveSong = new Audio();
 // ---------------------------------------------------------------------------------
 async function getSongs() {
   let a = await fetch("http://127.0.0.1:3000/Inventory/Songs/");
@@ -24,19 +24,22 @@ async function getSongs() {
   return songs;
 }
 
-// const play = function playSong(){
-//   let song = document.querySelector(".song").innerHTML;
-//   console.log(song);
-// }
+//--------------------------------------------------------------------------------------
+function playMusic(track) {
+  acitveSong.src = "/Inventory/Songs/" + track + ".mp3";
+  acitveSong.play();
+}
 
 // -------------------------------------------------------------------------------------
 async function main() {
   let songs = await getSongs();
-  console.log(songs);
+  // console.log(songs);
 
   let element = document.querySelector(".songs-list");
   for (const song of songs) {
-    element.innerHTML = element.innerHTML + `           <li class="song">
+    element.innerHTML =
+      element.innerHTML +
+      `           <li class="song">
                     <img src="Inventory/Icons/music.svg" alt="">
                     <span class="song-info">
                         <div class="song-title">${song}</div>
@@ -46,8 +49,13 @@ async function main() {
                     <img class="play" src="Inventory/Icons/play.svg" alt="">
                 </li>`;
   }
-  // var audio = new Audio(songs[2]);
-  // audio.play();
+
+  Array.from(document.querySelectorAll(".song")).forEach((e) => {
+    e.querySelector(".play").addEventListener("click", () => {
+      console.log(e.querySelector(".song-title").innerHTML);
+      playMusic(e.querySelector(".song-title").innerHTML);
+    });
+  });
 }
 
 main();
