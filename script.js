@@ -1,5 +1,6 @@
 console.log("Welcome to Spotify Clone!");
 
+let activeSongInfo;
 let activeSong = new Audio();
 
 // Fetches the list of songs from the server.
@@ -32,12 +33,15 @@ function playMusic(track) {
   document.querySelector(".play-pause").src = "Inventory/Icons/pause.svg";
   document.querySelector(".song-name").innerHTML =
     track + " - Sidhu Moose Wala";
+
+  activeSongInfo.querySelector(".play").src = "Inventory/Icons/pause.svg";
   activeSong.play();
 }
 
 // Main function to initialize the music player.
 async function main() {
   songs = await getSongs();
+  // playMusic(songs[0], true);
 
   let element = document.querySelector(".songs-list");
   for (const song of songs) {
@@ -55,10 +59,10 @@ async function main() {
 
   // Add event listener to play button of each song
   Array.from(document.querySelectorAll(".song")).forEach((e) => {
-    e.querySelector(".play").addEventListener("click", () => {
-      console.log(e.querySelector(".song-title").innerHTML);
-      playMusic(e.querySelector(".song-title").innerHTML);
-      e.querySelector(".play").src = "Inventory/Icons/pause.svg";
+    e.addEventListener("click", () => {
+      activeSongInfo = e;
+      console.log(activeSongInfo);
+      playMusic(activeSongInfo.querySelector(".song-title").innerHTML);
     });
   });
 
@@ -68,9 +72,11 @@ async function main() {
     if (activeSong.paused) {
       activeSong.play();
       document.querySelector(".play-pause").src = "Inventory/Icons/pause.svg";
+      activeSongInfo.querySelector(".play").src = "Inventory/Icons/pause.svg";
     } else {
       activeSong.pause();
       document.querySelector(".play-pause").src = "Inventory/Icons/play.svg";
+      activeSongInfo.querySelector(".play").src = "Inventory/Icons/play.svg";
     }
   });
 
@@ -88,7 +94,11 @@ async function main() {
   // Add event listener to volume range slider
   document.querySelector(".volume-range").addEventListener("input", () => {
     activeSong.volume = document.querySelector(".volume-range").value;
-    document.querySelector(".volume-on").src = "Inventory/Icons/volume.svg";
+    if (activeSong.volume == 0) {
+      document.querySelector(".volume-on").src = "Inventory/Icons/mute.svg";
+    } else {
+      document.querySelector(".volume-on").src = "Inventory/Icons/volume.svg";
+    }
   });
 
   // Update song progress and time display
@@ -96,7 +106,9 @@ async function main() {
     const formatTime = (seconds) => {
       const minutes = Math.floor(seconds / 60);
       const remainingSeconds = Math.floor(seconds % 60);
-      return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+      return `${minutes}:${
+        remainingSeconds < 10 ? "0" : ""
+      }${remainingSeconds}`;
     };
 
     document.querySelector(".song-time").innerHTML = `${formatTime(
