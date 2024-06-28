@@ -85,6 +85,11 @@ body {
   min-height: 85vh;
 }
 
+.songs-list{
+  list-style: decimal;
+  overflow: auto;
+}
+
 .songs-list .song{
   font-size: 12px;
   padding: 15px 5px;
