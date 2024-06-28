@@ -1,6 +1,6 @@
 console.log("Welcome to Spotify Clone!");
 
-let acitveSong = new Audio();
+let activeSong = new Audio();
 let songs = [];
 
 // ---------------------------------------------------------------------------------
@@ -26,14 +26,14 @@ async function getSongs() {
 
 //--------------------------------------------------------------------------------------
 function playMusic(track) {
-  acitveSong.src = "/Inventory/Songs/" + track + ".mp3";
+  activeSong.src = "/Inventory/Songs/" + track + ".mp3";
   document.querySelectorAll(".play").forEach((element) => {
     element.src = "Inventory/Icons/play.svg";
   });
   document.querySelector(".play-pause").src = "Inventory/Icons/pause.svg";
   document.querySelector(".song-name").innerHTML =
     track + " - Sidhu Moose Wala";
-  acitveSong.play();
+  activeSong.play();
 }
 
 // -------------------------------------------------------------------------------------
@@ -67,24 +67,42 @@ async function main() {
   //---------
   document.querySelector(".play-pause").addEventListener("click", () => {
     console.log("play-pause clicked");
-    if (acitveSong.paused) {
-      acitveSong.play();
+    if (activeSong.paused) {
+      activeSong.play();
       document.querySelector(".play-pause").src = "Inventory/Icons/pause.svg";
     } else {
-      acitveSong.pause();
+      activeSong.pause();
       document.querySelector(".play-pause").src = "Inventory/Icons/play.svg";
     }
   });
 
   //------------
   document.querySelector(".volume-on").addEventListener("click", () => {
-    if (acitveSong.volume != 0) {
-      acitveSong.volume = 0;
+    if (activeSong.volume != 0) {
+      activeSong.volume = 0;
       document.querySelector(".volume-on").src = "Inventory/Icons/mute.svg";
     } else {
-      acitveSong.volume = 1;
+      activeSong.volume = document.querySelector(".volume-range").value;
       document.querySelector(".volume-on").src = "Inventory/Icons/volume.svg";
     }
+  });
+
+  // ------------
+  document.querySelector(".volume-range").addEventListener("input", () => {
+    activeSong.volume = document.querySelector(".volume-range").value;
+    document.querySelector(".volume-on").src = "Inventory/Icons/volume.svg";
+  });
+
+  // -----------
+  activeSong.addEventListener("timeupdate", () => {
+    const formatTime = (seconds) => {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = Math.floor(seconds % 60);
+      return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+    };
+
+    document.querySelector(".song-time").innerHTML = `${formatTime(activeSong.currentTime)}/${formatTime(activeSong.duration)}`;
+    document.querySelector(".circle").style.left = (activeSong.currentTime / activeSong.duration) * 100 + "%";
   });
 }
 
