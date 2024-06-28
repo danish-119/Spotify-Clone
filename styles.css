@@ -229,8 +229,13 @@ body {
   margin: 10px;
 }
 
+.play-bar .song-time {
+  margin: 25px 8px;
+}
+
 .play-bar .first .song-name {
-  min-width: 180px;
+  width: 180px;
+  text-align: center;
 }
 
 .play-bar .song-buttons,
@@ -250,7 +255,7 @@ body {
   background: black;
   border-radius: 10px;
   position: absolute;
-  bottom: 8px;
+  bottom: 15px;
   margin: 6px;
 }
 
