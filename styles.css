@@ -9,7 +9,9 @@ a,
 .song-buttons img,
 .volume img,
 .volume input,
-.seekbar, .play{
+.seekbar,
+.song,
+.song * {
   cursor: pointer;
 }
 
@@ -82,14 +84,13 @@ body {
   padding: 10px;
 }
 
-
-.songs-list{
+.songs-list {
   height: 50vh;
   list-style: decimal;
   overflow: auto;
 }
 
-.songs-list .song{
+.songs-list .song {
   font-size: 12px;
   padding: 15px 5px;
   border: 1px solid gray;
@@ -100,11 +101,11 @@ body {
   margin: 10px;
 }
 
-.song .song-info{
+.song .song-info {
   width: 50%;
 }
 
-.sidebar-bottom .footer{
+.sidebar-bottom .footer {
   position: absolute;
   bottom: 10px;
 }
@@ -173,37 +174,37 @@ body {
   padding: 20px;
 }
 
-.playlists-section .playlists{
+.playlists-section .playlists {
   display: flex;
   gap: 14px;
   flex-wrap: wrap;
   margin: 0 5.05vw;
 }
 
-.playlist{
+.playlist {
   width: 150px;
   height: 182px;
   background-color: rgb(44, 44, 44);
   border-radius: 8px;
 }
 
-.playlist img{
+.playlist img {
   width: 132px;
   margin: 8px;
   margin-bottom: 0;
   border-radius: 8px;
 }
 
-
-.playlist-title, .play-now{
+.playlist-title,
+.play-now {
   font-weight: bold;
 }
 
-.playlist span{
+.playlist span {
   margin-left: 8px;
 }
 
-.playlist-description{
+.playlist-description {
   font-size: 0.7em;
   display: block;
   margin-top: 3px;
@@ -229,8 +230,13 @@ body {
   margin: 10px;
 }
 
+.play-bar .song-time {
+  margin: 25px 8px;
+}
+
 .play-bar .first .song-name {
-  min-width: 180px;
+  width: 180px;
+  text-align: center;
 }
 
 .play-bar .song-buttons,
@@ -250,7 +256,7 @@ body {
   background: black;
   border-radius: 10px;
   position: absolute;
-  bottom: 8px;
+  bottom: 15px;
   margin: 6px;
 }
 
@@ -265,7 +271,6 @@ body {
   transition: left 0.5s;
 }
 
-
 /* For Webkit browsers (e.g., Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 12px;
@@ -279,4 +284,3 @@ body {
 ::-webkit-scrollbar-track {
   background-color: #222; /* Dark color for the track */
 }
-
