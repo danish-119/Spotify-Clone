@@ -1,10 +1,10 @@
 console.log("Welcome to Spotify Clone!");
 
+let playlists = [];
+let activePlaylist;
 let activeSongInfo;
 let activeSong = new Audio();
 let songs = [];
-let playlists = [];
-let activePlaylist;
 let activeSongIndex;
 
 // Fetches the list of playlists from the server.
@@ -76,15 +76,24 @@ async function main() {
 
   let playlistElement = document.querySelector(".playlists");
   for (const playlist of playlists) {
-    playlistElement.innerHTML += `             <div class="playlist">
+    playlistElement.innerHTML += `             
+    <div class="playlist">
+            <div class="play-playlist">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
                     <img src="Inventory/Songs/${playlist}/cover.jpg" class="playlist-cover">
                     <div class="playlist-info">
                         <span class="playlist-title">${playlist}</span>
                         <span class="playlist-description">Rise Above Hate</span>
                     </div>
-                </div>`;
+    </div>`;
   }
 
+  document.querySelector(".songs-list").innerHTML = "";
   let songElement = document.querySelector(".songs-list");
   for (const song of songs) {
     songElement.innerHTML += `
@@ -98,6 +107,33 @@ async function main() {
         <img class="play" src="Inventory/Icons/play.svg" alt="">
       </li>`;
   }
+
+  // Add event listener to play each playlist
+  document.querySelectorAll(".playlist").forEach((e) => {
+    e.addEventListener("click", async () => {
+      activePlaylist = e;
+      songs = await getSongs(
+        activePlaylist.querySelector(".playlist-title").innerHTML
+      );
+
+      document.querySelector(".songs-list").innerHTML = "";
+      let songElement = document.querySelector(".songs-list");
+      for (const song of songs) {
+        songElement.innerHTML += `
+          <li class="song">
+            <img src="Inventory/Icons/music.svg" alt="">
+            <span class="song-info">
+              <div class="song-title">${song}</div>
+              <span>${
+                activePlaylist.querySelector(".playlist-title").innerHTML
+              }</span>
+            </span>
+            <span class="play-now">Play Now</span>
+            <img class="play" src="Inventory/Icons/play.svg" alt="">
+          </li>`;
+      }
+    });
+  });
 
   // Add event listener to play each song
   document.querySelectorAll(".song").forEach((e, index) => {

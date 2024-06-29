@@ -5,13 +5,17 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+:root{
+  --a:0;
+}
+
 a,
 .song-buttons img,
 .volume img,
 .volume input,
 .seekbar,
 .song,
-.song * {
+.song * ,.playlist , .playlist *{
   cursor: pointer;
 }
 
@@ -105,7 +109,7 @@ body {
   width: 50%;
 }
 
-.song-info > span{
+.song-info > span {
   font-size: 10px;
 }
 
@@ -185,11 +189,34 @@ body {
   margin: 0 5.05vw;
 }
 
+.play-playlist {
+  width: 28px;
+  height: 28px;
+  background-color: #1fdf64;
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 55px;
+  right: 17px;
+  opacity: var(--a);
+  transition: all 1s ease-out;
+}
+
 .playlist {
   width: 150px;
   height: 182px;
   background-color: rgb(44, 44, 44);
   border-radius: 8px;
+  position: relative;
+  transition: all .9s;
+}
+
+.playlist:hover{
+  background-color: rgb(105, 103, 103);
+  --a: 1;
 }
 
 .playlist img {
