@@ -1,0 +1,147 @@
+ <!--      <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div>
+                <div class="playlist">
+                    <img src="Inventory/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">Angry Mood</span>
+                        <span class="playlist-description">Calm your Anger</span>
+                    </div>
+                </div> -->
