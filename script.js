@@ -2,31 +2,34 @@ console.log("Welcome to Spotify Clone!");
 
 let activeSongInfo;
 let activeSong = new Audio();
+let songs = [];
+let activeSongIndex;
 
 // Fetches the list of songs from the server.
 async function getSongs() {
-  let a = await fetch("http://127.0.0.1:5500/Inventory/Songs/");
-  let response = await a.text();
+  let response = await fetch("http://127.0.0.1:5500/Inventory/Songs/");
+  let text = await response.text();
 
   let div = document.createElement("div");
-  div.innerHTML = response;
+  div.innerHTML = text;
   let as = div.getElementsByTagName("a");
 
-  let songs = [];
+  let songsList = [];
   for (let i = 0; i < as.length; i++) {
     if (as[i].href.endsWith(".mp3")) {
-      songs.push(
+      songsList.push(
         as[i].href.split("Songs/")[1].replaceAll("%20", " ").split(".mp3")[0]
       );
     }
   }
 
-  return songs;
+  return songsList;
 }
 
 // Plays the selected music track.
 function playMusic(track) {
   activeSong.src = "/Inventory/Songs/" + track + ".mp3";
+
   document.querySelectorAll(".play").forEach((element) => {
     element.src = "Inventory/Icons/play.svg";
   });
@@ -34,14 +37,16 @@ function playMusic(track) {
   document.querySelector(".song-name").innerHTML =
     track + " - Sidhu Moose Wala";
 
-  activeSongInfo.querySelector(".play").src = "Inventory/Icons/pause.svg";
+  if (activeSongInfo) {
+    activeSongInfo.querySelector(".play").src = "Inventory/Icons/pause.svg";
+  }
   activeSong.play();
 }
 
 // Main function to initialize the music player.
 async function main() {
   songs = await getSongs();
-  // playMusic(songs[0], true);
+  activeSongIndex = 0;
 
   let element = document.querySelector(".songs-list");
   for (const song of songs) {
@@ -57,26 +62,29 @@ async function main() {
       </li>`;
   }
 
-  // Add event listener to play button of each song
-  Array.from(document.querySelectorAll(".song")).forEach((e) => {
+  // Add event listener to play each song
+  document.querySelectorAll(".song").forEach((e, index) => {
     e.addEventListener("click", () => {
       activeSongInfo = e;
-      console.log(activeSongInfo);
-      playMusic(activeSongInfo.querySelector(".song-title").innerHTML);
+      activeSongIndex = index;
+      playMusic(songs[activeSongIndex]);
     });
   });
 
   // Add event listener to play-pause button
   document.querySelector(".play-pause").addEventListener("click", () => {
-    console.log("play-pause clicked");
     if (activeSong.paused) {
       activeSong.play();
       document.querySelector(".play-pause").src = "Inventory/Icons/pause.svg";
-      activeSongInfo.querySelector(".play").src = "Inventory/Icons/pause.svg";
+      if (activeSongInfo) {
+        activeSongInfo.querySelector(".play").src = "Inventory/Icons/pause.svg";
+      }
     } else {
       activeSong.pause();
       document.querySelector(".play-pause").src = "Inventory/Icons/play.svg";
-      activeSongInfo.querySelector(".play").src = "Inventory/Icons/play.svg";
+      if (activeSongInfo) {
+        activeSongInfo.querySelector(".play").src = "Inventory/Icons/play.svg";
+      }
     }
   });
 
@@ -116,6 +124,41 @@ async function main() {
     )}/${formatTime(activeSong.duration)}`;
     document.querySelector(".circle").style.left =
       (activeSong.currentTime / activeSong.duration) * 100 + "%";
+  });
+
+  // Add event listener to seek-bar
+  document.querySelector(".seekbar").addEventListener("click", (e) => {
+    let percent = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+    document.querySelector(".circle").style.left = percent + "%";
+    activeSong.currentTime = (activeSong.duration * percent) / 100;
+  });
+
+  // Add event listener to next button
+  document.querySelector(".next").addEventListener("click", () => {
+    if (activeSongIndex < songs.length - 1) {
+      activeSongIndex++;
+      activeSongInfo = document.querySelectorAll(".song")[activeSongIndex];
+      playMusic(songs[activeSongIndex]);
+    }
+  });
+
+  // Add event listener to previous button
+  document.querySelector(".previous").addEventListener("click", () => {
+    if (activeSongIndex > 0) {
+      activeSongIndex--;
+      activeSongInfo = document.querySelectorAll(".song")[activeSongIndex];
+      playMusic(songs[activeSongIndex]);
+    }
+  });
+
+  activeSong.addEventListener("timeupdate", () => {
+    if (activeSong.currentTime == activeSong.duration) {
+      if (activeSongIndex < songs.length - 1) {
+        activeSongIndex++;
+        activeSongInfo = document.querySelectorAll(".song")[activeSongIndex];
+        playMusic(songs[activeSongIndex]);
+      }
+    }
   });
 }
 
