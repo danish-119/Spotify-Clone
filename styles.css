@@ -105,6 +105,10 @@ body {
   width: 50%;
 }
 
+.song-info > span{
+  font-size: 10px;
+}
+
 .sidebar-bottom .footer {
   position: absolute;
   bottom: 10px;
