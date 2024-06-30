@@ -1,25 +1,50 @@
 console.log("Welcome to Spotify Clone!");
 
+let playlists = [];
+let activePlaylist;
 let activeSongInfo;
 let activeSong = new Audio();
 let songs = [];
 let activeSongIndex;
 
-// Fetches the list of songs from the server.
-async function getSongs() {
+// Fetches the list of playlists from the server.
+async function getPlaylists() {
   let response = await fetch("http://127.0.0.1:5500/Inventory/Songs/");
   let text = await response.text();
 
   let div = document.createElement("div");
   div.innerHTML = text;
-  let as = div.getElementsByTagName("a");
+  let links = div.getElementsByTagName("a");
+
+  let playlists = [];
+  for (let i = 0; i < links.length; i++) {
+    let parts = links[i].href.split("Songs/");
+    if (parts.length > 1) {
+      playlists.push(parts[1].replace(/%20/g, " "));
+    }
+  }
+
+  return playlists;
+}
+
+// Fetches the list of songs from the server.
+async function getSongs(playlist) {
+  let response = await fetch(
+    `http://127.0.0.1:5500/Inventory/Songs/${playlist}`
+  );
+  let text = await response.text();
+
+  let div = document.createElement("div");
+  div.innerHTML = text;
+  let links = div.getElementsByTagName("a");
 
   let songsList = [];
-  for (let i = 0; i < as.length; i++) {
-    if (as[i].href.endsWith(".mp3")) {
-      songsList.push(
-        as[i].href.split("Songs/")[1].replaceAll("%20", " ").split(".mp3")[0]
-      );
+  for (let i = 0; i < links.length; i++) {
+    if (links[i].href.endsWith(".mp3")) {
+      let parts = links[i].href.split(`Songs/${encodeURIComponent(playlist)}/`);
+      if (parts.length > 1) {
+        songsList.push(parts[1].replace(/%20/g, " ").split(".mp3")[0]);
+      }
     }
   }
 
@@ -28,7 +53,7 @@ async function getSongs() {
 
 // Plays the selected music track.
 function playMusic(track) {
-  activeSong.src = "/Inventory/Songs/" + track + ".mp3";
+  activeSong.src = "/Inventory/Songs/Sidhu Moose Wala/" + track + ".mp3";
 
   document.querySelectorAll(".play").forEach((element) => {
     element.src = "Inventory/Icons/play.svg";
@@ -45,22 +70,70 @@ function playMusic(track) {
 
 // Main function to initialize the music player.
 async function main() {
-  songs = await getSongs();
+  playlists = await getPlaylists();
+  songs = await getSongs(playlists[10]);
   activeSongIndex = 0;
 
-  let element = document.querySelector(".songs-list");
+  let playlistElement = document.querySelector(".playlists");
+  for (const playlist of playlists) {
+    playlistElement.innerHTML += `             
+    <div class="playlist">
+            <div class="play-playlist">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 20V4L19 12L5 20Z" stroke="#141B34" fill="#000" stroke-width="1.5"
+                        stroke-linejoin="round" />
+                </svg>
+            </div>
+                    <img src="Inventory/Songs/${playlist}/cover.jpg" class="playlist-cover">
+                    <div class="playlist-info">
+                        <span class="playlist-title">${playlist}</span>
+                        <span class="playlist-description">Rise Above Hate</span>
+                    </div>
+    </div>`;
+  }
+
+  document.querySelector(".songs-list").innerHTML = "";
+  let songElement = document.querySelector(".songs-list");
   for (const song of songs) {
-    element.innerHTML += `
+    songElement.innerHTML += `
       <li class="song">
         <img src="Inventory/Icons/music.svg" alt="">
         <span class="song-info">
           <div class="song-title">${song}</div>
-          <span>Sidhu Moose Wala</span>
+          <span>${playlists[10]}</span>
         </span>
         <span class="play-now">Play Now</span>
         <img class="play" src="Inventory/Icons/play.svg" alt="">
       </li>`;
   }
+
+  // Add event listener to play each playlist
+  document.querySelectorAll(".playlist").forEach((e) => {
+    e.addEventListener("click", async () => {
+      activePlaylist = e;
+      songs = await getSongs(
+        activePlaylist.querySelector(".playlist-title").innerHTML
+      );
+
+      document.querySelector(".songs-list").innerHTML = "";
+      let songElement = document.querySelector(".songs-list");
+      for (const song of songs) {
+        songElement.innerHTML += `
+          <li class="song">
+            <img src="Inventory/Icons/music.svg" alt="">
+            <span class="song-info">
+              <div class="song-title">${song}</div>
+              <span>${
+                activePlaylist.querySelector(".playlist-title").innerHTML
+              }</span>
+            </span>
+            <span class="play-now">Play Now</span>
+            <img class="play" src="Inventory/Icons/play.svg" alt="">
+          </li>`;
+      }
+    });
+  });
 
   // Add event listener to play each song
   document.querySelectorAll(".song").forEach((e, index) => {
@@ -112,6 +185,9 @@ async function main() {
   // Update song progress and time display
   activeSong.addEventListener("timeupdate", () => {
     const formatTime = (seconds) => {
+      if (isNaN(seconds) || seconds < 0) {
+        return "00:00";
+      }
       const minutes = Math.floor(seconds / 60);
       const remainingSeconds = Math.floor(seconds % 60);
       return `${minutes}:${
