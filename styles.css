@@ -5,8 +5,8 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-:root{
-  --a:0;
+:root {
+  --a: 0;
 }
 
 a,
@@ -15,7 +15,9 @@ a,
 .volume input,
 .seekbar,
 .song,
-.song * ,.playlist , .playlist *{
+.song *,
+.playlist,
+.playlist * {
   cursor: pointer;
 }
 
@@ -211,10 +213,10 @@ body {
   background-color: rgb(44, 44, 44);
   border-radius: 8px;
   position: relative;
-  transition: all .9s;
+  transition: all 0.9s;
 }
 
-.playlist:hover{
+.playlist:hover {
   background-color: rgb(105, 103, 103);
   --a: 1;
 }
@@ -300,6 +302,51 @@ body {
   bottom: 5px;
   left: 0%;
   transition: left 0.5s;
+}
+
+.hamburger {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  filter: invert(1);
+  z-index: 1100;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 1027px) {
+  .sidebar {
+    display: none;
+    position: fixed;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%)
+  }
+
+  .main-content{
+    width: 100%;
+  }
+
+  .play-bar{
+    width: 95%;
+  }
+
+  .first .song-name{
+    width: 100%;
+  }
+
+  .play-bar .first{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .first .volume{
+    display: none;
+  }
+
+  .hamburger {
+    display: block; 
+  }
 }
 
 /* For Webkit browsers (e.g., Chrome, Safari) */
